@@ -1,0 +1,54 @@
+:host {
+    display: flex;
+    flex: 1;
+    overflow: auto;
+    max-width: 1000px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    padding: 8px;
+    gap: 8px;
+}
+
+.spinner {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.list {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.left-side, .right-side {
+    flex: 1;
+}
+
+.left-side {
+    padding: 8px;
+}
+
+.title {
+    display: flex;
+    gap: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-side {
+        display: flex;
+        justify-content: center;
+    }
+}

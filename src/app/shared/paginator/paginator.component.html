@@ -1,0 +1,15 @@
+<div class="paginator" *ngIf="pagination">
+    <button mat-mini-fab color="primary"
+            (click)="pagination.prev && selectedUrl.emit(pagination!.prev)"
+            [disabled]="!pagination.prev">
+        <mat-icon>arrow_back_ios_new</mat-icon>
+    </button>
+
+    Page {{ pagination.currentPage }} of {{ pagination.totalPages }}
+
+    <button mat-mini-fab color="primary"
+            (click)="pagination.next && selectedUrl.emit(pagination!.next)"
+            [disabled]="!pagination.next">
+        <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,11 @@
+<mat-list>
+    <ng-container *ngFor="let item of items">
+        <mat-list-item [class.activated]="item === active" (click)="clicked.emit(item)">
+            <div class="list-item">
+                <mat-icon>account_circle</mat-icon>
+                {{ key ? item[key] : item }}
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </ng-container>
+</mat-list>

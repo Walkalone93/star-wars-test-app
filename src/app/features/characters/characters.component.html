@@ -1,0 +1,30 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="container">
+    <span class="left-side">
+      <div class="list" *ngIf="vm.page">
+        <div class="title">
+          <h3>Characters:</h3>
+          <star-wars-test-app-paginator [pagination]="vm.page.pagination"
+                                        (selectedUrl)="onPaginationChange($event)">
+          </star-wars-test-app-paginator>
+        </div>
+        <star-wars-test-app-list [items]="vm.page.characters"
+                                 key="name"
+                                 [active]="vm.activeCharacter"
+                                 (clicked)="showCharacterDetails($event)">
+        </star-wars-test-app-list>
+      </div>
+
+      <div class="container spinner" *ngIf="vm.loading">
+        <mat-spinner [diameter]="75" [strokeWidth]="8"></mat-spinner>
+      </div>
+    </span>
+    <span class="right-side">
+      <router-outlet></router-outlet>
+    </span>
+  </div>
+
+  <div class="container" *ngIf="vm.error">
+    <h3>{{ vm. error }}</h3>
+  </div>
+</ng-container>

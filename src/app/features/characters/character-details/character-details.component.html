@@ -1,0 +1,41 @@
+<h3>Character details:</h3>
+
+<div *ngIf="vm$ | async as vm" class="details">
+    <ng-container *ngIf="vm.character as character">
+        <div><b>Name:</b> {{ character.name }}</div>
+        <div><b>Height:</b> {{ character.height }}</div>
+        <div><b>Hair color:</b> {{ character.hair_color }}</div>
+        <div><b>Skin color:</b> {{ character.skin_color }}</div>
+        <div><b>Eye color:</b> {{ character.eye_color }}</div>
+        <div><b>Birth year:</b> {{ character.birth_year }}</div>
+        <div><b>Gender:</b> {{ character.gender }}</div>
+        <div><b>Homeworld:</b> {{ character.homeworld }}</div>
+        <div>
+            <b>Films:</b>
+            <ul *ngFor="let film of character.films">
+                <li>{{ film }}</li>
+            </ul>
+        </div>
+        <div>
+            <b>Species:</b>
+            <ul *ngFor="let species of character.species">
+                <li>{{ species }}</li>
+            </ul>
+        </div>
+        <div>
+            <b>Vehicles:</b>
+            <ul *ngFor="let vehicle of character.vehicles">
+                <li>{{ vehicle }}</li>
+            </ul>
+        </div>
+        <div>
+            <b>Starships:</b>
+            <ul *ngFor="let starship of character.starships">
+                <li>{{ starship }}</li>
+            </ul>
+        </div>
+        <div><b>Created:</b> {{ character.created | date: 'dd/MM/yyyy' }}</div>
+        <div><b>Edited:</b> {{ character.edited | date: 'dd/MM/yyyy' }}</div>
+        <div><b>Url:</b> {{ character.url }}</div>
+    </ng-container>
+</div>

@@ -1,0 +1,17 @@
+:host {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+ul {
+    margin: 0;
+}

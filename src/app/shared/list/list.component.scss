@@ -1,0 +1,23 @@
+.list-item {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+    color: #444;    
+    text-decoration: none;
+
+    &:hover {
+        color: #444;
+        text-decoration: underline;
+    }
+
+    mat-icon {
+        font-size: 26px;
+    }
+}
+
+mat-list-item.activated .list-item {
+    color: #673ab7;
+    text-decoration: underline;
+}
