@@ -16,7 +16,7 @@ export const characterRoutes: Route[] = [
     ],
     children: [
       {
-        path: ':name',
+        path: ':uid',
         component: CharacterDetailsComponent,
       },
     ]

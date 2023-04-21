@@ -17,19 +17,27 @@ export interface CharacterViewModel {
 
 export const selectCharactersState = createFeatureSelector<fromCharacters.CharactersState>(charactersFeature.name);
 
-export const selectCharactersPageState = (currentPage: number) => createSelector(
+export const selectCharactersPageState = (pageNumber: number) => createSelector(
     selectCharactersState,
-    state => state.entities[currentPage]
+    state => state.entities[pageNumber]
 )
+
+export const selectCharacter = (pageNumber: number, uid: string) => createSelector(
+    selectCharactersState,
+    state => {
+        const pageState = state.entities[pageNumber];
+        return pageState?.characters.find(character => character.uid === uid)
+    }
+);
 
 export const selectCharactersViewModel = createSelector(
     selectCharactersState,
     selectQueryParam('page'),
-    selectRouteParam('name'),
-    (charactersState, pageNumber, activeCharacterName): CharactersViewModel => {
+    selectRouteParam('uid'),
+    (charactersState, pageNumber, characterId): CharactersViewModel => {
         const page = charactersState.entities[Number(pageNumber) || 1];
-        const activeCharacter = activeCharacterName && page
-            ? page.characters.find(character => character.name === activeCharacterName) ?? null
+        const activeCharacter = characterId && page
+            ? page.characters.find(character => character.uid === characterId) ?? null
             : null;
         return {
             page: page ?? null,
@@ -43,12 +51,13 @@ export const selectCharactersViewModel = createSelector(
 export const selectCharacterViewModel = createSelector(
     selectCharactersState,
     selectQueryParam('page'),
-    selectRouteParam('name'),
-    (charactersState, pageNumber, activeCharacterName) => {
+    selectRouteParam('uid'),
+    (charactersState, pageNumber, characterId) => {
         const page = charactersState.entities[Number(pageNumber) || 1];
-        const character = activeCharacterName && page
-            ? page.characters.find(character => character.name === activeCharacterName) ?? null
+        const character = characterId && page
+            ? page.characters.find(character => character.uid === characterId) ?? null
             : null;
+
         return { character };
     }
 );

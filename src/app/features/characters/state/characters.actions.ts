@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { Character } from 'src/app/features/characters/characters.models';
+import { Character, CharacterDetails } from 'src/app/features/characters/characters.models';
 import { PaginatedResult } from 'src/app/shared/models/pagination';
 
 export const CharactersApiActions = createActionGroup({
@@ -8,5 +8,9 @@ export const CharactersApiActions = createActionGroup({
         'LoadCharacters': props<{ url: string }>(),
         'LoadCharactersSuccess': props<{ paginatedResult: PaginatedResult<Character[]> }>(),
         'LoadCharactersFailure': props<{ error: any }>(),
+
+        'LoadCharacterDetails': props<{ uid: string; page: number }>(),
+        'LoadCharacterDetailsSuccess': props<{ details: CharacterDetails; page: number }>(),
+        'LoadCharacterDetailsFailure': props<{ error: any }>(),
     }
 });

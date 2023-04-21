@@ -2,14 +2,14 @@ import { Observable, map } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PaginatedResult } from 'src/app/shared/models/pagination';
-import { Character, CharactersResponse } from './characters.models';
+import { Character, CharacterDetails, CharacterDetailsResponse, CharactersResponse } from './characters.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersApiService {
 
-  private readonly url = 'https://swapi.dev/api/people';
+  private readonly url = 'https://swapi.tech/api/people';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,8 +25,20 @@ export class CharactersApiService {
             next: response.next,
             prev: response.previous,
             currentPage,
-            totalPages: Math.ceil(response.count / 10)
+            totalPages: response.total_pages,
           }
+        }
+      })
+    );
+  }
+
+  getCharacterDetails(uid: number): Observable<CharacterDetails> {
+    return this.httpClient.get<CharacterDetailsResponse>(`${this.url}/${uid}`).pipe(
+      map((response: CharacterDetailsResponse) => {
+        return {
+          uid: response.result.uid,
+          description: response.result.description,
+          ...response.result.properties
         }
       })
     );

@@ -48,13 +48,14 @@ export class CharactersComponent implements OnInit {
   showCharacterDetails(character: Character) {
     const currentPage = this.getPageNumberFromUrl(window.location.href)
     this.router.navigate(
-      [character.name],
+      [character.uid],
       {
         relativeTo: this.route,
         queryParams: { page: currentPage }, 
         queryParamsHandling: 'merge',
       }
     );
+    this.loadCharacterDetails(character.uid);
   }
 
   private updateUrl(url: string) {
@@ -75,5 +76,10 @@ export class CharactersComponent implements OnInit {
 
   private loadCharacters(url: string) {
     this.store.dispatch(CharactersApiActions.loadcharacters({ url }));
+  }
+
+  private loadCharacterDetails(uid: string) {
+    const page = this.route.snapshot.queryParams['page'] ?? 1;
+    this.store.dispatch(CharactersApiActions.loadcharacterdetails({ uid, page }));
   }
 }

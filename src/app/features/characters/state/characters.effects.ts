@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { CharactersApiService } from 'src/app/features/characters/characters-api.service';
 import { CharactersApiActions } from './characters.actions';
-import { selectCharactersPageState } from './characters.selectors';
+import { selectCharacter, selectCharactersPageState } from './characters.selectors';
 
 @Injectable()
 export class CharactersEffects {
@@ -31,6 +31,24 @@ export class CharactersEffects {
         }),
         map(paginatedResult => CharactersApiActions.loadcharacterssuccess({ paginatedResult })),
         catchError(error => of(CharactersApiActions.loadcharactersfailure({ error })))
+      )
+    })
+  ));
+
+  loadCharacterDetails$ = createEffect(() => this.actions$.pipe(
+    ofType(CharactersApiActions.loadcharacterdetails),
+    mergeMap(({ uid, page }) => {
+      return this.store.select(selectCharacter(page, uid)).pipe(
+        first(),
+        mergeMap(cached => {
+          if (cached?.details) {
+            return of(cached.details);
+          }
+
+          return this.charactersApiService.getCharacterDetails(Number(uid));
+        }),
+        map(details => CharactersApiActions.loadcharacterdetailssuccess({ details, page })),
+        catchError(error => of(CharactersApiActions.loadcharacterdetailsfailure({ error })))
       )
     })
   ));
