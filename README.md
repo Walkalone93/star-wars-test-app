@@ -1,5 +1,6 @@
 # Star Wars App
 This is a simple web app that displays a list of the Star Wars characters and their detailed information
+<br>
 Please, keep in mind that's a draft implementation, hence not all corner cases are handled, UX/UI isn't ideal and so on :)
 
 ## Getting started

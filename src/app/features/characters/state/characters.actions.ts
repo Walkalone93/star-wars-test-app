@@ -5,12 +5,12 @@ import { PaginatedResult } from 'src/app/shared/models/pagination';
 export const CharactersApiActions = createActionGroup({
     source: 'Characters API',
     events: {
-        'LoadCharacters': props<{ url: string }>(),
-        'LoadCharactersSuccess': props<{ paginatedResult: PaginatedResult<Character[]> }>(),
-        'LoadCharactersFailure': props<{ error: any }>(),
+        'Load Characters': props<{ url: string }>(),
+        'Load Characters Success': props<{ paginatedResult: PaginatedResult<Character[]> }>(),
+        'Load Characters Failure': props<{ error: any }>(),
 
-        'LoadCharacterDetails': props<{ uid: string; page: number }>(),
-        'LoadCharacterDetailsSuccess': props<{ details: CharacterDetails; page: number }>(),
-        'LoadCharacterDetailsFailure': props<{ error: any }>(),
+        'Load Character Details': props<{ uid: string; page: number }>(),
+        'Load Character Details Success': props<{ details: CharacterDetails; page: number }>(),
+        'Load Character Details Failure': props<{ error: any }>(),
     }
 });

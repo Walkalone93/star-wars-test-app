@@ -23,11 +23,8 @@ export const selectCharactersPageState = (pageNumber: number) => createSelector(
 )
 
 export const selectCharacter = (pageNumber: number, uid: string) => createSelector(
-    selectCharactersState,
-    state => {
-        const pageState = state.entities[pageNumber];
-        return pageState?.characters.find(character => character.uid === uid)
-    }
+    selectCharactersPageState(pageNumber),
+    pageState => pageState?.characters.find(character => character.uid === uid)
 );
 
 export const selectCharactersViewModel = createSelector(
@@ -36,9 +33,7 @@ export const selectCharactersViewModel = createSelector(
     selectRouteParam('uid'),
     (charactersState, pageNumber, characterId): CharactersViewModel => {
         const page = charactersState.entities[Number(pageNumber) || 1];
-        const activeCharacter = characterId && page
-            ? page.characters.find(character => character.uid === characterId) ?? null
-            : null;
+        const activeCharacter = page?.characters.find(character => character.uid === characterId) ?? null;
         return {
             page: page ?? null,
             activeCharacter,
@@ -48,16 +43,13 @@ export const selectCharactersViewModel = createSelector(
     }
 );
 
-export const selectCharacterViewModel = createSelector(
+export const selectCharacterDetailsViewModel = createSelector(
     selectCharactersState,
     selectQueryParam('page'),
     selectRouteParam('uid'),
     (charactersState, pageNumber, characterId) => {
         const page = charactersState.entities[Number(pageNumber) || 1];
-        const character = characterId && page
-            ? page.characters.find(character => character.uid === characterId) ?? null
-            : null;
-
+        const character = page?.characters.find(character => character.uid === characterId) ?? null;
         return { character };
     }
 );

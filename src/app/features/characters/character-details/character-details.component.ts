@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { ActivatedRoute } from '@angular/router';
-import { CharacterViewModel, selectCharacterViewModel } from 'src/app/features/characters/state/characters.selectors';
+import { CharacterViewModel, selectCharacterDetailsViewModel } from 'src/app/features/characters/state/characters.selectors';
 import { CharactersApiActions } from 'src/app/features/characters/state/characters.actions';
 
 @Component({
@@ -18,7 +18,7 @@ import { CharactersApiActions } from 'src/app/features/characters/state/characte
 })
 export class CharacterDetailsComponent implements OnInit {  
 
-  vm$: Observable<CharacterViewModel> = this.store.select(selectCharacterViewModel);
+  vm$: Observable<CharacterViewModel> = this.store.select(selectCharacterDetailsViewModel);
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,) {}
@@ -30,7 +30,7 @@ export class CharacterDetailsComponent implements OnInit {
   private loadCharacterDetails() {
     const uid = this.route.snapshot.params['uid'];
     const page = this.route.snapshot.queryParams['page'];
-    this.store.dispatch(CharactersApiActions.loadcharacterdetails({ uid, page }));
+    this.store.dispatch(CharactersApiActions.loadCharacterDetails({ uid, page }));
   }
 
 }

@@ -27,11 +27,11 @@ const initialState: CharactersState = adapter.getInitialState({
 const reducer = createReducer(
 	initialState,
 	// Load Characters list
-	on(CharactersApiActions.loadcharacters, state => ({
+	on(CharactersApiActions.loadCharacters, state => ({
 		...state,
 		loading: true,
 	})),
-	on(CharactersApiActions.loadcharacterssuccess, (state, { paginatedResult }) => {
+	on(CharactersApiActions.loadCharactersSuccess, (state, { paginatedResult }) => {
 		const { result, pagination } = paginatedResult;
 		const page = {
 			characters: result,
@@ -44,14 +44,14 @@ const reducer = createReducer(
 			error: null,
 		});
 	}),
-	on(CharactersApiActions.loadcharactersfailure, state => ({
+	on(CharactersApiActions.loadCharactersFailure, state => ({
 		...state,
 		loading: false,
 		error: 'Error loading characters'
 	})),
 
 	// Load Character details
-	on(CharactersApiActions.loadcharacterdetailssuccess, (state, { details, page }) => {
+	on(CharactersApiActions.loadCharacterDetailsSuccess, (state, { details, page }) => {
 		const pageState = state.entities[page];
 		if (!pageState) {
 			return state;

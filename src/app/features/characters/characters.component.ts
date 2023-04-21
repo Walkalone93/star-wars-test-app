@@ -55,6 +55,7 @@ export class CharactersComponent implements OnInit {
         queryParamsHandling: 'merge',
       }
     );
+
     this.loadCharacterDetails(character.uid);
   }
 
@@ -75,11 +76,11 @@ export class CharactersComponent implements OnInit {
   }
 
   private loadCharacters(url: string) {
-    this.store.dispatch(CharactersApiActions.loadcharacters({ url }));
+    this.store.dispatch(CharactersApiActions.loadCharacters({ url }));
   }
 
   private loadCharacterDetails(uid: string) {
     const page = this.route.snapshot.queryParams['page'] ?? 1;
-    this.store.dispatch(CharactersApiActions.loadcharacterdetails({ uid, page }));
+    this.store.dispatch(CharactersApiActions.loadCharacterDetails({ uid, page }));
   }
 }

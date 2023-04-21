@@ -12,7 +12,7 @@ import { selectCharacter, selectCharactersPageState } from './characters.selecto
 export class CharactersEffects {
 
   loadCharacters$ = createEffect(() => this.actions$.pipe(
-    ofType(CharactersApiActions.loadcharacters),
+    ofType(CharactersApiActions.loadCharacters),
     mergeMap(({ url }) => {
       const { searchParams } = new URL(url);
       const page = Number(searchParams.get('page'));
@@ -29,14 +29,14 @@ export class CharactersEffects {
 
           return this.charactersApiService.getCharacters(url);
         }),
-        map(paginatedResult => CharactersApiActions.loadcharacterssuccess({ paginatedResult })),
-        catchError(error => of(CharactersApiActions.loadcharactersfailure({ error })))
+        map(paginatedResult => CharactersApiActions.loadCharactersSuccess({ paginatedResult })),
+        catchError(error => of(CharactersApiActions.loadCharactersFailure({ error })))
       )
     })
   ));
 
   loadCharacterDetails$ = createEffect(() => this.actions$.pipe(
-    ofType(CharactersApiActions.loadcharacterdetails),
+    ofType(CharactersApiActions.loadCharacterDetails),
     mergeMap(({ uid, page }) => {
       return this.store.select(selectCharacter(page, uid)).pipe(
         first(),
@@ -47,8 +47,8 @@ export class CharactersEffects {
 
           return this.charactersApiService.getCharacterDetails(Number(uid));
         }),
-        map(details => CharactersApiActions.loadcharacterdetailssuccess({ details, page })),
-        catchError(error => of(CharactersApiActions.loadcharacterdetailsfailure({ error })))
+        map(details => CharactersApiActions.loadCharacterDetailsSuccess({ details, page })),
+        catchError(error => of(CharactersApiActions.loadCharacterDetailsFailure({ error })))
       )
     })
   ));

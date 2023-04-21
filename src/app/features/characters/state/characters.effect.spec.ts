@@ -59,10 +59,10 @@ describe(CharactersEffects.name, () => {
             };
             jest.spyOn(charactersApiService, 'getCharacters').mockReturnValue(of(paginatedResult));
 
-            actions.next(CharactersApiActions.loadcharacters({ url }));
+            actions.next(CharactersApiActions.loadCharacters({ url }));
 
             effects.loadCharacters$.subscribe(action => {
-                expect(action).toEqual(CharactersApiActions.loadcharacterssuccess({ paginatedResult }));
+                expect(action).toEqual(CharactersApiActions.loadCharactersSuccess({ paginatedResult }));
                 done();
             });
         });
@@ -73,10 +73,10 @@ describe(CharactersEffects.name, () => {
                 throw error
             });
 
-            actions.next(CharactersApiActions.loadcharacters({ url }));
+            actions.next(CharactersApiActions.loadCharacters({ url }));
 
             effects.loadCharacters$.subscribe(action => {
-                expect(action).toEqual(CharactersApiActions.loadcharactersfailure({ error }));
+                expect(action).toEqual(CharactersApiActions.loadCharactersFailure({ error }));
                 done();
             });
         });
@@ -98,11 +98,11 @@ describe(CharactersEffects.name, () => {
             const getCharactersSpy = jest.spyOn(charactersApiService, 'getCharacters');
             jest.spyOn(store, 'select').mockReturnValue(of(charactersPageMock));
 
-            actions.next(CharactersApiActions.loadcharacters({ url }));
+            actions.next(CharactersApiActions.loadCharacters({ url }));
 
             effects.loadCharacters$.subscribe(action => {
                 expect(getCharactersSpy).toBeCalledTimes(0);
-                expect(action).toEqual(CharactersApiActions.loadcharacterssuccess({ paginatedResult }));
+                expect(action).toEqual(CharactersApiActions.loadCharactersSuccess({ paginatedResult }));
                 done();
             });
         });
