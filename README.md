@@ -1,7 +1,7 @@
 # Star Wars App
-This is a simple web app that displays a list of the Star Wars characters and their detailed information
+This is a simple web app that displays a list of the Star Wars characters and their detailed information.
 <br>
-Keep in mind that's a draft implementation, hence not all corner cases are handled, UX/UI isn't ideal and so on :)
+Keep in mind that this is a draft implementation, so not all edge cases are handled, UX/UI is not perfect, etc :)
 
 ## Getting started
 
@@ -30,9 +30,9 @@ npm run test
 
 ### Details
 - characters list is paginated and displayed on the left side. Current active page is stored in the query parameters
-- when user selects some character, their details are displayed on the right side, as a child route (`/characters/:uid` path parameter)
-- deep linking works fine. Correct page with selected character can be opened because active page and selected character are stored in the URL
-- NgRx is used for storing and caching data. No duplicate requests
+- when user selects a character, its details are displayed on the right as a child route (`/characters/:uid`)
+- deep link works fine. You can open the correct page with the selected character because the active page and the selected character are stored in the URL
+- NgRx is used for data storage and caching. No duplicate requests
 - standalone components are used instead of NgModules
 - unit tests are written with Jest framework - see [here](src/app/features/characters/state/characters.effect.spec.ts)
 - UX/UI is responsive and friendly. Details page is going below the list for mobile screens, loader is displayed when paginated list is loaded, etc
